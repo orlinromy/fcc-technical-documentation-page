@@ -1,0 +1,118 @@
+/* 
+Declare variables
+*/
+:root {
+    --font-family: "Nanum Gothic", sans;
+    --code-font-family: "Nanum Gothic Coding", monospace;
+    --line-height: 1.3em;
+    --main-color: #003945;
+    --sub-color: #1EC4B4;
+    --highlight-color: #EC4847;
+    --text-color: #464958;
+}
+
+html {
+    font-family: var(--font-family);
+    color: var(--text-color);
+}
+ 
+header {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Layout */
+body {
+    position: fixed;
+    display: flex;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    flex-direction: row;
+}
+
+main {
+    overflow-y: auto;
+    flex-grow: 8;
+    flex-basis: 20em;
+}
+
+nav {
+    flex-grow: 2;
+    flex-basis: 10em;
+    background-color: var(--main-color);
+}
+
+/* Document styling */
+nav header {
+    text-align: center;
+    padding: 60px 30px 30px 30px;
+    color: white;
+}
+
+nav ul {
+    padding: 0;
+}
+
+nav li:first-child {
+    border-top: solid 1px var(--sub-color);
+}
+
+nav li a {
+    display: block;
+    padding: 20px;
+    word-wrap: break-word;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    border-bottom: solid 1px var(--sub-color);
+}
+
+li a:hover {
+    background-color: var(--sub-color);
+}
+
+p {
+    line-height: var(--line-height);
+}
+
+/* code {
+    font-family: var(--code-font-family);
+    line-height: var(--line-height);
+    background-color: #ECEFF1;
+    letter-spacing:0.8px;
+    border-radius:5px;
+    padding: 3px;
+} */
+
+.main-section {
+    margin: 60px;
+}
+
+.main-section li {
+    padding: 5px;
+}
+
+h3 span {
+    background-color: var(--highlight-color);
+    padding: 7px;
+    color: white;
+}
+
+dt {
+    color: var(--highlight-color);
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+/* Customize Prism font */
+code[class*="language-"],
+pre[class*="language-"] {
+    font-family: var(--code-font-family);
+    letter-spacing: 0.8px;
+}
