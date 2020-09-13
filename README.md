@@ -8,5 +8,5 @@ Content is taken from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 - HTML
 - CSS Flexbox
 - Visual Studio Code
-- [Prism] (https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript)
-- [Google Fonts] (https://fonts.google.com)
+- [Prism](https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript)
+- [Google Fonts](https://fonts.google.com)
