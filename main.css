@@ -2,18 +2,19 @@
 Declare variables
 */
 :root {
-    --font-family: "Nanum Gothic", sans;
-    --code-font-family: "Nanum Gothic Coding", monospace;
+    --font-family: "PT Sans", sans;
+    --code-font-family: "Nanum Gothic Coding";
     --line-height: 1.3em;
     --main-color: #003945;
     --sub-color: #1EC4B4;
     --highlight-color: #EC4847;
-    --text-color: #464958;
+    --text-color: #3a3c47;
 }
 
 html {
     font-family: var(--font-family);
     color: var(--text-color);
+    font-size: 18px;
 }
  
 header {
@@ -58,9 +59,6 @@ nav ul {
     padding: 0;
 }
 
-nav li:first-child {
-    border-top: solid 1px var(--sub-color);
-}
 
 nav li a {
     display: block;
@@ -69,25 +67,18 @@ nav li a {
     text-decoration: none;
     font-weight: 600;
     color: white;
-    border-bottom: solid 1px var(--sub-color);
+    font-size: 18px;
 }
 
 li a:hover {
     background-color: var(--sub-color);
+    transition: 0.1s;
 }
 
 p {
     line-height: var(--line-height);
+    padding: 10px;
 }
-
-/* code {
-    font-family: var(--code-font-family);
-    line-height: var(--line-height);
-    background-color: #ECEFF1;
-    letter-spacing:0.8px;
-    border-radius:5px;
-    padding: 3px;
-} */
 
 .main-section {
     margin: 60px;
@@ -99,7 +90,8 @@ p {
 
 h3 span {
     background-color: var(--highlight-color);
-    padding: 7px;
+    border-radius: 5px;
+    padding: 9px;
     color: white;
 }
 
@@ -108,11 +100,78 @@ dt {
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 5px;
+    padding-left: 10px;
 }
+
+code {
+    font-family: var(--code-font-family);
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 1em;
+    }
+    header {
+        font-size: 1.5em;
+    }
+    body {
+        position: fixed;
+        display: flex;
+        align-items: stretch;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        flex-direction: column;
+    }
+    
+    main {
+        overflow-y: auto;
+        flex-grow: 7;
+        flex-basis: 20em;
+    }
+    
+    nav {
+        flex-grow: 1;
+        flex-basis: 10em;
+        background-color: var(--main-color);
+        overflow-y: auto;
+    }
+
+    nav header {
+        text-align: center;
+        padding: 20px 10px 10px 10px;
+        color: white;
+    }
+
+    nav li a {
+        display: block;
+        padding: 10px;
+        word-wrap: break-word;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        font-size: 1em;;
+    }
+    /* Customize Prism font */
+    code[class*="language-"],
+    pre[class*="language-"] {
+        font-family: var(--code-font-family);
+        letter-spacing: 0.8px;
+        word-wrap: break-word;
+        font-size: 1em;
+    }
+
+}
+
 
 /* Customize Prism font */
 code[class*="language-"],
 pre[class*="language-"] {
     font-family: var(--code-font-family);
     letter-spacing: 0.8px;
+    word-wrap: break-word;
+    font-size: 16px;
 }

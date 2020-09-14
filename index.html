@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Technical Documentation - JavaScript: Using Promises</title>
-        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700|Nanum+Gothic+Coding:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|Nanum+Gothic+Coding:400,700" rel="stylesheet">
         <link href="asset/prism.css" rel="stylesheet">
         <link href="main.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <nav id="navbar">
@@ -12,27 +13,27 @@
                 JavaScript: Using Promises
             </header>
             <ul>
-                <li><a href="#Introduction">Introduction</a></li>
-                <li><a href="#Guarantees">Guarantees</a></li>
-                <li><a href="#Chaining">Chaining</a></li>
-                <li><a href="#Error_propagation">Error propagation</a></li>
-                <li><a href="#Promise_rejection_events">Promise rejection events</a></li>
-                <li><a href="#Creating_a_Promise_around_an_old_callback_API">Creating a Promise around an old callback API</a></li>
-                <li><a href="#Composition">Composition</a></li>
-                <li><a href="#Timing">Timing</a></li>
-                <li><a href="#Nesting">Nesting</a></li>
-                <li><a href="#Common_mistakes">Common mistakes</a></li>
-                <li><a href="#When_promises_and_tasks_collide">When promises and tasks collide</a></li>
+                <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+                <li><a href="#Guarantees" class="nav-link">Guarantees</a></li>
+                <li><a href="#Chaining" class="nav-link">Chaining</a></li>
+                <li><a href="#Error_propagation" class="nav-link">Error propagation</a></li>
+                <li><a href="#Promise_rejection_events" class="nav-link">Promise rejection events</a></li>
+                <li><a href="#Creating_a_Promise_around_an_old_callback_API" class="nav-link">Creating a Promise around an old callback API</a></li>
+                <li><a href="#Composition" class="nav-link">Composition</a></li>
+                <li><a href="#Timing" class="nav-link">Timing</a></li>
+                <li><a href="#Nesting" class="nav-link">Nesting</a></li>
+                <li><a href="#Common_mistakes" class="nav-link">Common mistakes</a></li>
+                <li><a href="#When_promises_and_tasks_collide" class="nav-link">When promises and tasks collide</a></li>
             </ul>
         </nav>
         <main id="main-doc">
             <section class="main-section" id="Introduction">
-                <header>Introduction</header>
-                <p>A <code class="language-javascript">Promise</code> is an object representing the eventual completion or failure of an asynchronous operation. Since most people are consumers of already-created promises, this guide will explain consumption of returned promises before explaining how to create them.</p>
+                <header>INTRODUCTION</header>
+                <p>A <code class="language-none">Promise</code> is an object representing the eventual completion or failure of an asynchronous operation. Since most people are consumers of already-created promises, this guide will explain consumption of returned promises before explaining how to create them.</p>
                 <p>Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function.</p>
                 <p>Imagine a function, <code class="language-javascript">createAudioFileAsync()</code>, which asynchronously generates a sound file given a configuration record and two callback functions, one called if the audio file is successfully created, and the other called if an error occurs.</p>
                 <p>Here's some code that uses <code class="language-javascript">createAudioFileAsync()</code>:</p>
-                <pre class="language-javascript line-numbers"><code>
+                <pre class="line-numbers language-javascript"><code class="language-javascript">
 function successCallback(result) {
     console.log("Audio file ready at URL: " + result);
 }
@@ -45,7 +46,7 @@ createAudioFileAsync(audioSettings, successCallback, failureCallback);
                 </code></pre>
                 <p>Modern functions return a promise that you can attach your callbacks to instead:</p>
                 <p>If <code class="language-javascript">createAudioFileAsync()</code> were rewritten to return a promise, using it could be as simple as this:</p>
-                <pre><code class="language-javascript">
+                <pre class="language-javascript line-numbers"><code>
 createAudioFileAsync(audioSettings).then(successCallback, failureCallback);
                 </code></pre>
                 <p>That's shorthand for:</p>
@@ -56,7 +57,7 @@ promise.then(successCallback, failureCallback);
                 <p>We call this an <em>asynchronous function call</em>. This convention has several advantages. We will explore each one.</p>
             </section>
             <section class="main-section" id="Guarantees">
-                <header>Guarantees</header>
+                <header>GUARANTEES</header>
                 <p>Unlike old-fashioned passed-in callbacks, a promise comes with some guarantees:</p>
                 <ul>
                     <li>Callbacks will never be called before the completion of the current run of the JavaScript event loop.</li>
@@ -66,7 +67,7 @@ promise.then(successCallback, failureCallback);
                 <p>One of the great things about using promises is <b>chaining</b>.</p>
             </section>
             <section class="main-section" id="Chaining">
-                <header>Chaining</header>
+                <header>CHAINING</header>
                 <p>A common need is to execute two or more asynchronous operations back to back, where each subsequent operation starts when the previous operation succeeds, with the result from the previous step. We accomplish this by creating a <b>promise chain</b>.</p>
                 <p>Here's the magic: the then() function returns a new promise, different from the original:</p>
                 <pre class="language-javascript line-numbers"><code>
@@ -145,7 +146,7 @@ Do this, no matter what happened before
             </section>
 
             <section class="main-section" id="Error_propagation">
-                <header>Error propagation</header>
+                <header>ERROR PROPAGATION</header>
                 <p>You might recall seeing <code class="language-javascript">failureCallback</code> three times in the pyramid of doom earlier, compared to only once at the end of the promise chain:</p>
                 <pre class="language-javascript line-numbers"><code>
 doSomething()
@@ -182,7 +183,7 @@ async function foo() {
                 <p>Promises solve a fundamental flaw with the callback pyramid of doom, by catching all errors, even thrown exceptions and programming errors. This is essential for functional composition of asynchronous operations.</p>
             </section>
             <section class="main-section" id="Promise_rejection_events">
-                <header>Promise rejection events</header>
+                <header>PROMISE REJECTION EVENTS</header>
                 <p>Whenever a promise is rejected, one of two events is sent to the global scope (generally, this is either the window or, if being used in a web worker, it's the Worker or other worker-based interface). The two events are:</p>
                 <dl>
                     <dt>rejectionhandled</dt>
@@ -206,10 +207,10 @@ window.addEventListener("unhandledrejection", event => {
                 <p>Ideally, of course, you should examine the rejected promises to make sure none of them are actual code bugs before just discarding these events.</p>
             </section>
             <section class="main-section" id="Creating_a_Promise_around_an_old_callback_API">
-                <header>Creating a Promise around an old callback API</header>
+                <header>CREATING A PROMISE AROUND AN OLD CALLBACK API</header>
                 <p>A Promise can be created from scratch using its constructor. This should be needed only to wrap old APIs.</p>
-                <p></p>In an ideal world, all asynchronous functions would already return promises. Unfortunately, some APIs still expect success and/or failure callbacks to be passed in the old way. The most obvious example is the <code class="language-javascript">setTimeout()</code> function:</p>
-                <pre><code class="language-javascript">
+                <p>In an ideal world, all asynchronous functions would already return promises. Unfortunately, some APIs still expect success and/or failure callbacks to be passed in the old way. The most obvious example is the <code class="language-javascript line-numbers">setTimeout()</code> function:</p>
+                <pre><code class="language-javascript line-numbers">
 setTimeout(() => saySomething("10 seconds passed"), 10*1000);
                 </code></pre>
                 <p>Mixing old-style callbacks and promises is problematic. If saySomething() fails or contains a programming error, nothing catches it. <code class="language-javascript">setTimeout</code> is to blame for this.</p>
@@ -222,7 +223,7 @@ wait(10*1000).then(() => saySomething("10 seconds")).catch(failureCallback);
                 <p>Basically, the promise constructor takes an executor function that lets us resolve or reject a promise manually. Since <code class="language-javascript">setTimeout()</code> doesn't really fail, we left out reject in this case.</p>
             </section>
             <section class="main-section" id="Composition">
-                <header>Composition</header>
+                <header>COMPOSITION</header>
                 <p><code class="language-javascript">Promise.resolve()</code> and <code class="language-javascript">Promise.reject()</code> are shortcuts to manually create an already resolved or rejected promise respectively. This can be useful at times.</p>
                 <p><code class="language-javascript">Promise.all()</code> and <code class="language-javascript">Promise.race()</code> are two composition tools for running asynchronous operations in parallel.</p>
                 <p>We can start operations in parallel and wait for them all to finish like this:</p>
@@ -238,8 +239,8 @@ Promise.all([func1(), func2(), func3()])
                 <p>Basically, we reduce an array of asynchronous functions down to a promise chain equivalent to: <code class="language-javascript">Promise.resolve().then(func1).then(func2).then(func3);</code></p>
                 <p>This can be made into a reusable compose function, which is common in functional programming:</p>
                 <pre class="language-javascript line-numbers"><code>
-                    const applyAsync = (acc,val) => acc.then(val);
-                    const composeAsync = (...funcs) => x => funcs.reduce(applyAsync, Promise.resolve(x));
+const applyAsync = (acc,val) => acc.then(val);
+const composeAsync = (...funcs) => x => funcs.reduce(applyAsync, Promise.resolve(x));
                 </code></pre>
                 <p>The <code class="language-javascript">composeAsync()</code> function will accept any number of functions as arguments, and will return a new function that accepts an initial value to be passed through the composition pipeline:</p>
                 <pre class="language-javascript line-numbers"><code>
@@ -256,7 +257,7 @@ result = await f(result);
                 </code></pre>
             </section>
             <section class="main-section" id="Timing">
-                <header>Timing</header>
+                <header>TIMING</header>
                 <p></p>To avoid surprises, functions passed to <code class="language-javascript">then()</code> will never be called synchronously, even with an already-resolved promise:</p>
                 <pre class="language-javascript line-numbers"><code>
 Promise.resolve().then(() => console.log(2));
@@ -273,7 +274,7 @@ console.log(1); // 1, 2, 3, 4
                 </code></pre>
             </section>
             <section class="main-section" id="Nesting">
-                <header>Nesting</header>
+                <header>NESTING</header>
                 <p>Simple promise chains are best kept flat without nesting, as nesting can be a result of careless composition. See <a href="technical_page.html#Common_mistakes">common mistakes.</a></p>
                 <p>Nesting is a control structure to limit the scope of  statements. Specifically, a nested <code class="language-javascript">catch</code> only catches failures in its scope and below, not errors higher up in the chain outside the nested scope. When used correctly, this gives greater precision in error recovery:</p>
                 <pre class="language-javascript line-numbers"><code>
@@ -289,7 +290,7 @@ doSomethingCritical()
                 <p>The inner neutralizing <code class="language-javascript">catch</code> statement only catches failures from <code class="language-javascript">doSomethingOptional()</code> and <code class="language-javascript">doSomethingExtraNice()</code>, after which the code resumes with <code class="language-javascript">moreCriticalStuff()</code>. Importantly, if <code class="language-javascript">doSomethingCritical()</code> fails, its error is caught by the final (outer) <code class="language-javascript">catch</code> only.</p>
             </section>
             <section class="main-section" id="Common_mistakes">
-                <header>Common mistakes</header>
+                <header>COMMON MISTAKES</header>
                 <p>Here are some common mistakes to watch out for when composing promise chains. Several of these mistakes manifest in the following example:</p>
                 <pre class="language-javascript line-numbers"><code>
 // Bad example! Spot 3 mistakes!
@@ -321,7 +322,7 @@ doSomething()
                 </p>    
             </section>
             <section class="main-section" id="When_promises_and_tasks_collide">
-                <header>When promises and tasks collide</header>
+                <header>WHEN PROMISES AND TASKS COLLIDE</header>
                 <p>If you run into situations in which you have promises and tasks (such as events or callbacks) which are firing in unpredictable orders, it's possible you may benefit from using a microtask to check status or balance out your promises when promises are created conditionally.
                     If you think microtasks may help solve this problem, see the microtask guide to learn more about how to use <code class="language-javascript">queueMicrotask()</code> to enqueue a function as a microtask.</p>
             </section>
