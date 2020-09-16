@@ -36,31 +36,30 @@ body {
     flex-direction: row;
 }
 
-main {
+#main-doc {
     overflow-y: auto;
     flex-grow: 8;
     flex-basis: 20em;
 }
 
-nav {
+#navbar {
     flex-grow: 2;
     flex-basis: 10em;
     background-color: var(--main-color);
 }
 
 /* Document styling */
-nav header {
+#navbar header {
     text-align: center;
     padding: 60px 30px 30px 30px;
     color: white;
 }
 
-nav ul {
+#navbar ul {
     padding: 0;
 }
 
-
-nav li a {
+.nav-link {
     display: block;
     padding: 20px;
     word-wrap: break-word;
@@ -70,7 +69,7 @@ nav li a {
     font-size: 18px;
 }
 
-li a:hover {
+.nav-link:hover {
     background-color: var(--sub-color);
     transition: 0.1s;
 }
@@ -106,6 +105,19 @@ dt {
 code {
     font-family: var(--code-font-family);
 }
+/* hide button */
+.nav-button {
+    display: none;
+}
+
+/* Customize Prism font */
+code[class*="language-"],
+pre[class*="language-"] {
+    font-family: var(--code-font-family);
+    letter-spacing: 0.8px;
+    word-wrap: break-word;
+    font-size: 16px;
+}
 
 @media (max-width: 600px) {
     html {
@@ -127,34 +139,60 @@ code {
         flex-direction: column;
     }
     
-    main {
+    #main-doc {
         overflow-y: auto;
-        flex-grow: 7;
-        flex-basis: 20em;
+        flex-grow: 10;
+        flex-basis: 40em;
     }
     
-    nav {
+    #navbar {
         flex-grow: 1;
-        flex-basis: 10em;
+        flex-basis: 3.5em;
         background-color: var(--main-color);
-        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
     }
 
-    nav header {
+    #navbar header {
         text-align: center;
         padding: 20px 10px 10px 10px;
         color: white;
+        font-size: 1.7em;
     }
 
-    nav li a {
-        display: block;
-        padding: 10px;
-        word-wrap: break-word;
-        text-decoration: none;
-        font-weight: 600;
-        color: white;
-        font-size: 1em;;
+    .main-section {
+        margin: 40px 20px 20px 20px;
     }
+
+    .nav-button {
+        display: block;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 1.3em;
+    }
+    
+    .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-links ul {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-link {
+        padding: 0.5em;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
     /* Customize Prism font */
     code[class*="language-"],
     pre[class*="language-"] {
@@ -167,11 +205,3 @@ code {
 }
 
 
-/* Customize Prism font */
-code[class*="language-"],
-pre[class*="language-"] {
-    font-family: var(--code-font-family);
-    letter-spacing: 0.8px;
-    word-wrap: break-word;
-    font-size: 16px;
-}
